@@ -9,7 +9,7 @@ service, no cost (see "Forms" below).
 
 This is built to run entirely on **GitHub + Google**: GitHub Pages for
 hosting, a GitHub OAuth App for CMS login, and a free Google Apps Script
-Web App (since GitHub itself has no form-handling) for the four forms.
+Web App (since GitHub itself has no form-handling) for the site's forms.
 Every internal link, `<img src>`, script tag, and JSON fetch in this repo
 uses a **relative path** (`assets/...`, `content/...`) rather than a
 root-relative one (`/assets/...`), which works whether the site is served
@@ -47,10 +47,10 @@ at a domain root or a subpath.
     photos, theme photos, excerpt audio, or slide decks yet — those still
     need filling in via `/admin` (or `assets/media/<event-id>/`, see
     "Media files" below) as they become available.
-  - The four `data-sheet-endpoint="YOUR_APPS_SCRIPT_URL"` attributes (one
-    each in `suggest-topic.html`, `review-event.html`, `volunteer.html`, and
-    the newsletter box in `index.html`) need your deployed Google Apps
-    Script Web App URL — see "Forms" below.
+  - The five `data-sheet-endpoint="YOUR_APPS_SCRIPT_URL"` attributes (one
+    each in `suggest-topic.html`, `review-event.html`, `volunteer.html`,
+    `newsletter.html`, and the newsletter box in `index.html`) need your
+    deployed Google Apps Script Web App URL — see "Forms" below.
   - The `backend:` block in `admin/config.yml` needs your GitHub
     username/repo and your deployed OAuth proxy URL — see "Turning on the
     CMS" below.
@@ -67,6 +67,7 @@ about.html                About Talk That Science
 suggest-topic.html        Contact — topic suggestion form
 review-event.html         Contact — bar night review form
 volunteer.html            Contact — volunteer signup form
+newsletter.html           Contact — newsletter signup form
 admin/                   Decap CMS (config.yml + index.html)
 data/
   episodes.jsonl          Source-of-truth episode facts — see "Episode data"
@@ -227,10 +228,10 @@ no code to write, just deploy and configure:
 
 ## Forms
 
-`suggest-topic.html`, `review-event.html`, `volunteer.html` (the three
-Contact pages), and the newsletter box on the homepage all submit into a
-**Google Sheet** — no third-party form service, no account beyond Google,
-no cost, no submission cap.
+`suggest-topic.html`, `review-event.html`, `volunteer.html`, and
+`newsletter.html` (the four Contact pages), plus the newsletter box on
+the homepage, all submit into a **Google Sheet** — no third-party form
+service, no account beyond Google, no cost, no submission cap.
 
 How it works: each submission POSTs to a small **Google Apps Script Web
 App** bound to a Google Sheet you create. The script appends a row to a
@@ -251,8 +252,9 @@ Google Sheet's script editor, it doesn't run as part of this site).
    not your sheet's data.)
 4. Copy the deployment URL (ends in `/exec`) and replace
    `YOUR_APPS_SCRIPT_URL` with it in the `data-sheet-endpoint="..."`
-   attribute of all four forms: one each in `suggest-topic.html`,
-   `review-event.html`, `volunteer.html`, and `index.html`.
+   attribute of all five forms: one each in `suggest-topic.html`,
+   `review-event.html`, `volunteer.html`, `newsletter.html`, and the
+   newsletter box in `index.html`.
 5. Submit each form once from the live site and confirm a row lands in
    the matching tab.
 

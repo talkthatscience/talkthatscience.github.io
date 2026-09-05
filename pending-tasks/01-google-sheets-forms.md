@@ -1,11 +1,11 @@
 # Google Sheets form backend
 
-**Status:** Not started — all 4 forms POST to a placeholder Apps Script URL.
+**Status:** Not started — all 5 forms POST to a placeholder Apps Script URL.
 
 ## Why it matters
 
-`suggest-topic.html`, `review-event.html`, `volunteer.html`, and the
-newsletter box on `index.html` all use
+`suggest-topic.html`, `review-event.html`, `volunteer.html`,
+`newsletter.html`, and the newsletter box on `index.html` all use
 `data-sheet-endpoint="YOUR_APPS_SCRIPT_URL"`. Until this is replaced with
 a real deployment URL, submissions go nowhere.
 
@@ -19,7 +19,8 @@ a real deployment URL, submissions go nowhere.
 4. Copy the deployment URL (ends in `/exec`) and replace
    `YOUR_APPS_SCRIPT_URL` in each matching `data-sheet-endpoint="..."`
    attribute:
-   - `suggest-topic.html`, `review-event.html`, `volunteer.html` — 1 each
+   - `suggest-topic.html`, `review-event.html`, `volunteer.html`,
+     `newsletter.html` — 1 each
    - `index.html` — 1 occurrence (newsletter box)
 5. Submit each form once from the live site to confirm a row lands in
    the matching tab of the Sheet (one tab per form, created

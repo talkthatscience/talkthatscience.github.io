@@ -30,6 +30,7 @@
           <a href="suggest-topic.html">Suggest a Topic</a>
           <a href="review-event.html">Review a Bar Night</a>
           <a href="volunteer.html" aria-current="page">Volunteer</a>
+          <a href="newsletter.html">Newsletter</a>
         </div>
       </div>
       <a class="btn btn-primary" href="https://www.echobox.radio/" target="_blank" rel="noopener" style="padding:0.5rem 1.1rem;">Listen Live</a>
@@ -53,6 +54,7 @@
       <a class="filter-btn" href="suggest-topic.html">Suggest a Topic</a>
       <a class="filter-btn" href="review-event.html">Review a Bar Night</a>
       <a class="filter-btn active" href="volunteer.html">Volunteer</a>
+      <a class="filter-btn" href="newsletter.html">Newsletter</a>
     </div>
   </div>
 
@@ -75,18 +77,18 @@
             <input type="email" id="vol-email" name="email" required />
           </div>
           <div class="form-field">
-            <label>How would you like to help?</label>
-            <div style="display:flex; flex-direction:column; gap:0.5rem;">
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="door_checkin" style="width:auto;" /> Door / check-in</label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="av_sound" style="width:auto;" /> AV / sound</label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="social_media" style="width:auto;" /> Social media</label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="research_scouting" style="width:auto;" /> Research scouting</label>
-              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="other" style="width:auto;" /> Something else</label>
-            </div>
+            <label for="vol-phone">Phone number</label>
+            <input type="tel" id="vol-phone" name="phone" placeholder="+31 6 12345678" />
           </div>
           <div class="form-field">
-            <label for="vol-availability">Availability / anything else</label>
-            <textarea id="vol-availability" name="availability" placeholder="Weeknights, specific dates you're free, questions, etc."></textarea>
+            <label>How would you like to help?</label>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="event_hosting" style="width:auto;" /> Event hosting</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="social_media" style="width:auto;" /> Social media</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="research_scouting" style="width:auto;" /> Researchers scouting</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="graphic_design" style="width:auto;" /> Graphic design</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="it_support" style="width:auto;" /> IT support</label>
+            </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">Sign up to volunteer</button>
         </form>

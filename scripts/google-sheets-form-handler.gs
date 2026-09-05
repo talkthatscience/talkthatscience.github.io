@@ -1,8 +1,8 @@
 /*
  * Google Apps Script Web App that turns a Google Sheet into a free form
  * backend for this site's forms (suggest-topic.html, review-event.html,
- * volunteer.html, and the newsletter box in index.html) — see README.md
- * "Forms" for the full one-time setup:
+ * volunteer.html, newsletter.html, and the newsletter box in index.html)
+ * — see README.md "Forms" for the full one-time setup:
  *
  *   1. Create a new Google Sheet.
  *   2. Extensions -> Apps Script, delete the default content, paste this

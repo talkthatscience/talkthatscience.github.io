@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Events &amp; Slides — Talk That Science</title>
-<meta name="description" content="Every Talk That Science broadcast and Science Bar Talk: dates, topics, tags, excerpt audio, and slide decks." />
+<title>Newsletter — Talk That Science</title>
+<meta name="description" content="One email whenever there's a new Talk That Science broadcast or bar night. No spam, unsubscribe any time." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -21,7 +21,7 @@
     </a>
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="events.html" aria-current="page">Events &amp; Slides</a>
+      <a href="events.html">Events &amp; Slides</a>
       <a href="calendar.html">Calendar</a>
       <a href="about.html">About</a>
       <div class="nav-item nav-dropdown">
@@ -30,7 +30,7 @@
           <a href="suggest-topic.html">Suggest a Topic</a>
           <a href="review-event.html">Review a Bar Night</a>
           <a href="volunteer.html">Volunteer</a>
-          <a href="newsletter.html">Newsletter</a>
+          <a href="newsletter.html" aria-current="page">Newsletter</a>
         </div>
       </div>
       <a class="btn btn-primary" href="https://www.echobox.radio/" target="_blank" rel="noopener" style="padding:0.5rem 1.1rem;">Listen Live</a>
@@ -43,40 +43,38 @@
 <main id="main">
   <section class="hero" style="padding-bottom:1.5rem;">
     <div class="container">
-      <div class="eyebrow">Event &amp; Slide Hub</div>
-      <h1>Every broadcast. Every bar night.</h1>
-      <p class="hero-lede">Dates, topics, tags, an audio excerpt, and — for live Science Bar Talks — the slide deck, optimised for pulling up on your phone mid-panel.</p>
+      <div class="eyebrow">Contact</div>
+      <h1>Never Miss an Episode</h1>
+      <p class="hero-lede">One email whenever there's a new broadcast or bar night. No spam, unsubscribe any time.</p>
     </div>
   </section>
+
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="Contact options">
+      <a class="filter-btn" href="suggest-topic.html">Suggest a Topic</a>
+      <a class="filter-btn" href="review-event.html">Review a Bar Night</a>
+      <a class="filter-btn" href="volunteer.html">Volunteer</a>
+      <a class="filter-btn active" href="newsletter.html">Newsletter</a>
+    </div>
+  </div>
 
   <section class="section" style="padding-top:0.5rem;">
-    <div class="container">
-      <div class="filter-bar" role="group" aria-label="Filter events">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="live_event">Live Bar Talks</button>
-        <button class="filter-btn" data-filter="broadcast">Echobox Broadcasts</button>
-      </div>
-      <div class="tag-cloud" id="tag-cloud" role="group" aria-label="Filter by tag"></div>
+    <div class="container" style="max-width:720px;">
+      <div class="form-card">
+        <div class="form-success" id="newsletter-success">You're on the list — thanks!</div>
+        <!-- PLACEHOLDER: set up the Google Sheet + Apps Script Web App (see
+             README "Forms"), then replace YOUR_APPS_SCRIPT_URL below with
+             its deployment URL — or point this at a real mailing list
+             provider (Buttondown/Mailchimp/etc) instead. -->
+        <form name="newsletter" data-sheet-endpoint="YOUR_APPS_SCRIPT_URL" data-success-target="newsletter-success">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
 
-      <div class="section-head">
-        <div><h2>Upcoming</h2></div>
-      </div>
-      <div class="grid" id="upcoming-events-grid">
-        <div class="empty-state">Loading…</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Archive</h2>
-          <p>Past episodes and bar nights — slides stay up for reference.</p>
-        </div>
-      </div>
-      <div class="grid" id="past-events-grid">
-        <div class="empty-state">Loading…</div>
+          <div class="form-field">
+            <label for="newsletter-email">Email address</label>
+            <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" required />
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Sign me up</button>
+        </form>
       </div>
     </div>
   </section>
