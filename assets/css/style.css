@@ -643,8 +643,5 @@ input:focus, select:focus, textarea:focus {
   gap: 2rem;
   flex-wrap: wrap;
 }
-.footer-links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-.footer-links a { color: var(--ink); text-decoration: none; font-weight: 600; }
-.footer-links a:hover { color: var(--accent-2); }
-.footer-admin { margin-top: 1.5rem; font-size: 0.78rem; opacity: 0.8; }
+.footer-admin { font-size: 0.78rem; opacity: 0.8; }
 .footer-admin a { color: var(--ink); font-weight: 700; }
