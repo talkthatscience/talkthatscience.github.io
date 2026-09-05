@@ -4,8 +4,8 @@
 
 ## Why it matters
 
-`get-involved.html` (topic suggestion, event review, volunteer signup) and
-the newsletter box on `index.html` all use
+The three Contact pages — `suggest-topic.html`, `review-event.html`,
+`volunteer.html` — and the newsletter box on `index.html` all use
 `action="https://formspree.io/f/YOUR_FORM_ID"`. Until this is replaced with
 a real ID, submissions go nowhere.
 
@@ -20,7 +20,7 @@ a real ID, submissions go nowhere.
    - Volunteer signup
    - Newsletter signup
 3. Replace `YOUR_FORM_ID` in each matching `action="..."` attribute:
-   - `get-involved.html` — 3 occurrences
+   - `suggest-topic.html`, `review-event.html`, `volunteer.html` — 1 each
    - `index.html` — 1 occurrence (newsletter box)
 4. Submit each form once from the live site to confirm it lands in the
    right Formspree inbox.

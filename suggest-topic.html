@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calendar — Talk That Science</title>
-<meta name="description" content="All upcoming Talk That Science broadcasts and live Science Bar Talks, in order." />
+<title>Suggest a Topic — Talk That Science</title>
+<meta name="description" content="Know a researcher with a great story, or a paper that deserves a wider audience? Suggest a topic for Talk That Science." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -22,12 +22,12 @@
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="events.html">Events &amp; Slides</a>
-      <a href="calendar.html" aria-current="page">Calendar</a>
+      <a href="calendar.html">Calendar</a>
       <a href="about.html">About</a>
       <div class="nav-item nav-dropdown">
         <span class="nav-dropdown-trigger" tabindex="0">Contact</span>
         <div class="nav-dropdown-menu">
-          <a href="suggest-topic.html">Suggest a Topic</a>
+          <a href="suggest-topic.html" aria-current="page">Suggest a Topic</a>
           <a href="review-event.html">Review a Bar Night</a>
           <a href="volunteer.html">Volunteer</a>
         </div>
@@ -42,16 +42,47 @@
 <main id="main">
   <section class="hero" style="padding-bottom:1.5rem;">
     <div class="container">
-      <div class="eyebrow">Calendar</div>
-      <h1>What's next</h1>
-      <p class="hero-lede">Every upcoming Echobox broadcast and live bar night at Oedipus Brewery, in chronological order.</p>
+      <div class="eyebrow">Contact</div>
+      <h1>Suggest a Topic</h1>
+      <p class="hero-lede">Know a researcher with a great story, or a paper that deserves a wider audience? Tell us — no account needed.</p>
     </div>
   </section>
 
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="Contact options">
+      <a class="filter-btn active" href="suggest-topic.html">Suggest a Topic</a>
+      <a class="filter-btn" href="review-event.html">Review a Bar Night</a>
+      <a class="filter-btn" href="volunteer.html">Volunteer</a>
+    </div>
+  </div>
+
   <section class="section" style="padding-top:0.5rem;">
-    <div class="container">
-      <div class="timeline" id="calendar-timeline">
-        <div class="empty-state">Loading…</div>
+    <div class="container" style="max-width:720px;">
+      <div class="form-card">
+        <div class="form-success" id="topic-success">Thanks — we read every suggestion. If it's a fit, we'll follow up.</div>
+        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
+             YOUR_FORM_ID below with the ID it gives you. See README. -->
+        <form name="topic-suggestion" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="topic-success">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
+
+          <div class="form-field">
+            <label for="topic-idea">What's the topic or research?</label>
+            <textarea id="topic-idea" name="topic" required placeholder="e.g. a paper, a researcher, a phenomenon you can't stop thinking about"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="topic-why">Why does it belong on Talk That Science?</label>
+            <textarea id="topic-why" name="why_interesting" placeholder="Optional — what makes it a good bar-night conversation?"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="topic-link">Link to the paper / article / researcher (optional)</label>
+            <input type="text" id="topic-link" name="reference_link" placeholder="https://…" />
+          </div>
+          <div class="form-field">
+            <label for="topic-email">Your email (optional, in case we have questions)</label>
+            <input type="email" id="topic-email" name="email" placeholder="you@example.com" />
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Send suggestion</button>
+        </form>
       </div>
     </div>
   </section>

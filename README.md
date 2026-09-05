@@ -48,9 +48,10 @@ would be needed.
     photos, theme photos, excerpt audio, or slide decks yet — those still
     need filling in via `/admin` (or `assets/media/<event-id>/`, see
     "Media files" below) as they become available.
-  - The four `action="https://formspree.io/f/YOUR_FORM_ID"` attributes (three
-    forms in `get-involved.html`, the newsletter box in `index.html`) need
-    your real Formspree form IDs — see "Forms" below.
+  - The four `action="https://formspree.io/f/YOUR_FORM_ID"` attributes (one
+    each in `suggest-topic.html`, `review-event.html`, `volunteer.html`, and
+    the newsletter box in `index.html`) need your real Formspree form IDs —
+    see "Forms" below.
   - The `backend:` block in `admin/config.yml` needs your GitHub
     username/repo and your deployed OAuth proxy URL — see "Turning on the
     CMS" below.
@@ -64,7 +65,9 @@ events.html              Event & Slide Hub — every broadcast + bar night,
                          filterable, with excerpt audio + slide links
 calendar.html            Chronological list of upcoming broadcasts + events
 about.html                About Talk That Science
-get-involved.html         3 forms: topic suggestion, event review, volunteer
+suggest-topic.html        Contact — topic suggestion form
+review-event.html         Contact — bar night review form
+volunteer.html            Contact — volunteer signup form
 admin/                   Decap CMS (config.yml + index.html)
 data/
   episodes.jsonl          Source-of-truth episode facts — see "Episode data"
@@ -225,17 +228,18 @@ no code to write, just deploy and configure:
 
 ## Forms
 
-`get-involved.html` (topic suggestions, event reviews, volunteer signup) and
-the newsletter box on the homepage POST to **Formspree**, a free
-form-backend service that works from any static host (GitHub Pages has no
-built-in form handling of its own):
+`suggest-topic.html`, `review-event.html`, and `volunteer.html` (the three
+Contact pages) and the newsletter box on the homepage POST to
+**Formspree**, a free form-backend service that works from any static host
+(GitHub Pages has no built-in form handling of its own):
 
 1. Sign up at [formspree.io](https://formspree.io) and create a form for
    each of the four use cases (topic suggestion, event review, volunteer
    signup, newsletter) — each gets its own form ID and its own submissions
    inbox/notifications.
 2. Replace `YOUR_FORM_ID` in the matching `action="https://formspree.io/f/YOUR_FORM_ID"`
-   attribute: three in `get-involved.html`, one in `index.html`.
+   attribute: one each in `suggest-topic.html`, `review-event.html`,
+   `volunteer.html`, and one in `index.html`.
 3. That's it — `assets/js/site.js` already POSTs each form to its own
    `action` URL via `fetch`, shows the inline success message, and falls
    back to a normal form submit (Formspree's own confirmation page) if

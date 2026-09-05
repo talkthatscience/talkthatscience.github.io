@@ -157,6 +157,14 @@ p { margin: 0 0 1em; }
 
 /* ---- nav dropdown (Contact) ---- */
 .nav-dropdown { position: relative; }
+.nav-dropdown-trigger {
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.nav-dropdown:hover .nav-dropdown-trigger,
+.nav-dropdown-trigger:focus { color: var(--accent-2); font-style: italic; }
 .nav-dropdown-menu {
   position: absolute;
   top: 100%;
@@ -455,6 +463,9 @@ p { margin: 0 0 1em; }
   font-weight: 600;
   cursor: pointer;
   font-family: var(--font-body);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 .tag-search {
   display: flex;

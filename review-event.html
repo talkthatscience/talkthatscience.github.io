@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calendar — Talk That Science</title>
-<meta name="description" content="All upcoming Talk That Science broadcasts and live Science Bar Talks, in order." />
+<title>Review a Bar Night — Talk That Science</title>
+<meta name="description" content="Were you at Oedipus Brewery for a Talk That Science Bar Talk? Tell us what worked." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -22,13 +22,13 @@
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="events.html">Events &amp; Slides</a>
-      <a href="calendar.html" aria-current="page">Calendar</a>
+      <a href="calendar.html">Calendar</a>
       <a href="about.html">About</a>
       <div class="nav-item nav-dropdown">
         <span class="nav-dropdown-trigger" tabindex="0">Contact</span>
         <div class="nav-dropdown-menu">
           <a href="suggest-topic.html">Suggest a Topic</a>
-          <a href="review-event.html">Review a Bar Night</a>
+          <a href="review-event.html" aria-current="page">Review a Bar Night</a>
           <a href="volunteer.html">Volunteer</a>
         </div>
       </div>
@@ -42,16 +42,57 @@
 <main id="main">
   <section class="hero" style="padding-bottom:1.5rem;">
     <div class="container">
-      <div class="eyebrow">Calendar</div>
-      <h1>What's next</h1>
-      <p class="hero-lede">Every upcoming Echobox broadcast and live bar night at Oedipus Brewery, in chronological order.</p>
+      <div class="eyebrow">Contact</div>
+      <h1>Review a Bar Night</h1>
+      <p class="hero-lede">Were you at Oedipus Brewery for a Science Bar Talk? Tell us what worked.</p>
     </div>
   </section>
 
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="Contact options">
+      <a class="filter-btn" href="suggest-topic.html">Suggest a Topic</a>
+      <a class="filter-btn active" href="review-event.html">Review a Bar Night</a>
+      <a class="filter-btn" href="volunteer.html">Volunteer</a>
+    </div>
+  </div>
+
   <section class="section" style="padding-top:0.5rem;">
-    <div class="container">
-      <div class="timeline" id="calendar-timeline">
-        <div class="empty-state">Loading…</div>
+    <div class="container" style="max-width:720px;">
+      <div class="form-card">
+        <div class="form-success" id="review-success">Thanks for the feedback — it goes straight to the team planning the next one.</div>
+        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
+             YOUR_FORM_ID below with the ID it gives you. See README. -->
+        <form name="event-review" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="review-success">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
+
+          <div class="form-field">
+            <label for="review-event-name">Which event did you attend?</label>
+            <input type="text" id="review-event-name" name="event_attended" required placeholder="e.g. Quantum Computing & Cold Coffee, 18 June" />
+          </div>
+          <div class="form-field">
+            <label>Overall rating</label>
+            <div class="rating-row" role="radiogroup" aria-label="Overall rating">
+              <input type="radio" id="r1" name="rating" value="1" /><label for="r1">1</label>
+              <input type="radio" id="r2" name="rating" value="2" /><label for="r2">2</label>
+              <input type="radio" id="r3" name="rating" value="3" /><label for="r3">3</label>
+              <input type="radio" id="r4" name="rating" value="4" /><label for="r4">4</label>
+              <input type="radio" id="r5" name="rating" value="5" /><label for="r5">5</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="review-comments">What worked, what didn't?</label>
+            <textarea id="review-comments" name="comments" placeholder="Sound, venue, length, the questions round — anything."></textarea>
+          </div>
+          <div class="form-field">
+            <label for="review-return">Would you come back?</label>
+            <select id="review-return" name="would_return">
+              <option value="yes">Yes, definitely</option>
+              <option value="maybe">Maybe</option>
+              <option value="no">Probably not</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Submit review</button>
+        </form>
       </div>
     </div>
   </section>

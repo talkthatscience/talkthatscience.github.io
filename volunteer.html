@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Talk That Science — Echobox Radio &amp; Live Science Bar Talks</title>
-<meta name="description" content="Talk That Science: a monthly talk show on Echobox Radio and a live science bar night at Oedipus Brewery. Listen live, browse the archive, and catch up on past events." />
+<title>Volunteer — Talk That Science</title>
+<meta name="description" content="Volunteer with Talk That Science — door and check-in, AV, social media, or research scouting." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -20,7 +20,7 @@
       <img src="assets/img/banner_logo.png" alt="Talk That Science" />
     </a>
     <nav class="main-nav" aria-label="Primary">
-      <a href="index.html" aria-current="page">Home</a>
+      <a href="index.html">Home</a>
       <a href="events.html">Events &amp; Slides</a>
       <a href="calendar.html">Calendar</a>
       <a href="about.html">About</a>
@@ -29,7 +29,7 @@
         <div class="nav-dropdown-menu">
           <a href="suggest-topic.html">Suggest a Topic</a>
           <a href="review-event.html">Review a Bar Night</a>
-          <a href="volunteer.html">Volunteer</a>
+          <a href="volunteer.html" aria-current="page">Volunteer</a>
         </div>
       </div>
       <a class="btn btn-primary" href="https://www.echobox.radio/" target="_blank" rel="noopener" style="padding:0.5rem 1.1rem;">Listen Live</a>
@@ -40,73 +40,58 @@
 </header>
 
 <main id="main">
-
-  <section class="section" style="padding-bottom:1rem;">
+  <section class="hero" style="padding-bottom:1.5rem;">
     <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Coming up next</h2>
-          <p>The next Echobox broadcast, and the next live night at Oedipus — both, always.</p>
-        </div>
-        <a class="btn btn-secondary" href="calendar.html">Full Calendar →</a>
-      </div>
-      <div class="grid" id="next-events-teaser">
-        <div class="empty-state">Loading…</div>
-      </div>
+      <div class="eyebrow">Contact</div>
+      <h1>Volunteer With Us</h1>
+      <p class="hero-lede">Door and check-in, sound, social media, or scouting new research — there's a role that fits an evening a month.</p>
     </div>
   </section>
 
-  <section class="hero">
-    <div class="container hero-split">
-      <div>
-        <div class="eyebrow">Echobox Radio &middot; Oedipus Brewery, Amsterdam</div>
-        <h1>Real research. Real questions. No jargon left unexplained.</h1>
-        <p class="hero-lede">We play the nicest tunes while talking about the coolest research — monthly on Echobox Radio, and live at Oedipus Brewery for anyone who wants to ask the questions peer review never will.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="https://www.echobox.radio/" target="_blank" rel="noopener">▶ Listen Live on Echobox</a>
-          <a class="btn btn-secondary" href="events.html">Browse Events &amp; Slides</a>
-        </div>
-      </div>
-      <img class="hero-illustration" src="assets/img/hero-illustration.png" alt="Illustration of scientists in lab coats playing with radio and lab equipment, in the Talk That Science style" />
+  <div class="container">
+    <div class="filter-bar" role="group" aria-label="Contact options">
+      <a class="filter-btn" href="suggest-topic.html">Suggest a Topic</a>
+      <a class="filter-btn" href="review-event.html">Review a Bar Night</a>
+      <a class="filter-btn active" href="volunteer.html">Volunteer</a>
     </div>
-  </section>
+  </div>
 
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h2>Catch up on the latest</h2>
-          <p>Most recent episode — excerpt below, full archive on the Events &amp; Slides hub.</p>
-        </div>
-        <a class="btn btn-secondary" href="events.html">Full Archive →</a>
-      </div>
-      <div class="grid" id="latest-episode-teaser">
-        <div class="empty-state">Loading…</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="form-card" style="max-width:640px;">
-        <h2 style="margin-top:0;">Never miss an episode</h2>
-        <p class="card-desc">One email whenever there's a new broadcast or bar night. No spam, unsubscribe any time.</p>
+  <section class="section" style="padding-top:0.5rem;">
+    <div class="container" style="max-width:720px;">
+      <div class="form-card">
+        <div class="form-success" id="volunteer-success">Thanks for signing up — we'll be in touch before the next event.</div>
         <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
-             YOUR_FORM_ID below with the ID it gives you — or point this at a
-             real mailing list provider (Buttondown/Mailchimp/etc). See README. -->
-        <form name="newsletter" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="newsletter-success">
+             YOUR_FORM_ID below with the ID it gives you. See README. -->
+        <form name="volunteer-signup" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="volunteer-success">
           <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
-          <div class="form-success" id="newsletter-success">You're on the list — thanks!</div>
-          <div class="newsletter-box">
-            <label class="visually-hidden" for="newsletter-email">Email address</label>
-            <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" required />
-            <button class="btn btn-primary" type="submit">Sign me up</button>
+
+          <div class="form-field">
+            <label for="vol-name">Name</label>
+            <input type="text" id="vol-name" name="name" required />
           </div>
+          <div class="form-field">
+            <label for="vol-email">Email</label>
+            <input type="email" id="vol-email" name="email" required />
+          </div>
+          <div class="form-field">
+            <label>How would you like to help?</label>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="door_checkin" style="width:auto;" /> Door / check-in</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="av_sound" style="width:auto;" /> AV / sound</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="social_media" style="width:auto;" /> Social media</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="research_scouting" style="width:auto;" /> Research scouting</label>
+              <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" name="interest" value="other" style="width:auto;" /> Something else</label>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="vol-availability">Availability / anything else</label>
+            <textarea id="vol-availability" name="availability" placeholder="Weeknights, specific dates you're free, questions, etc."></textarea>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Sign up to volunteer</button>
         </form>
       </div>
     </div>
   </section>
-
 </main>
 
 <footer class="site-footer">
