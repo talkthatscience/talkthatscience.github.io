@@ -331,7 +331,16 @@
 
     loadSettings().then(function (settings) {
       if (missionEl && settings.about) missionEl.textContent = settings.about.mission;
-      if (storyEl && settings.about) storyEl.textContent = settings.about.story;
+      if (storyEl && settings.about && settings.about.story) {
+        // A CMS "text" widget only gives us one string back — blank lines
+        // in it mark paragraph breaks, same convention as Markdown, so a
+        // content manager can add more just by leaving a blank line.
+        var paragraphs = String(settings.about.story)
+          .split(/\n\s*\n/)
+          .map(function (p) { return p.trim(); })
+          .filter(Boolean);
+        storyEl.innerHTML = paragraphs.map(function (p) { return "<p>" + escapeHTML(p) + "</p>"; }).join("");
+      }
       if (teamEl && settings.about && settings.about.teamNote) teamEl.textContent = settings.about.teamNote;
       if (venueEl && settings.venue) {
         venueEl.textContent = settings.venue.name + " — " + settings.venue.address;
