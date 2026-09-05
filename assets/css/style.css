@@ -627,15 +627,6 @@ input:focus, select:focus, textarea:focus {
 }
 .form-success.visible { display: block; }
 
-/* ---- newsletter ---- */
-.newsletter-box {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-}
-.newsletter-box input[type="email"] { flex: 1; min-width: 220px; }
-
 /* ---- footer ---- */
 .site-footer {
   border-top: 2px solid var(--ink);
