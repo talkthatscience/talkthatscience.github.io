@@ -322,6 +322,17 @@
   }
 
   /* ---------------- page: about ---------------- */
+  // A CMS "text" widget only gives us one string back — blank lines in it
+  // mark paragraph breaks, same convention as Markdown, so a content
+  // manager can add another paragraph just by leaving a blank line.
+  function renderParagraphs(el, text) {
+    var paragraphs = String(text)
+      .split(/\n\s*\n/)
+      .map(function (p) { return p.trim(); })
+      .filter(Boolean);
+    el.innerHTML = paragraphs.map(function (p) { return "<p>" + escapeHTML(p) + "</p>"; }).join("");
+  }
+
   function renderAbout() {
     var missionEl = document.getElementById("about-mission");
     var storyEl = document.getElementById("about-story");
@@ -330,17 +341,8 @@
     if (!missionEl && !storyEl && !teamEl && !venueEl) return;
 
     loadSettings().then(function (settings) {
-      if (missionEl && settings.about) missionEl.textContent = settings.about.mission;
-      if (storyEl && settings.about && settings.about.story) {
-        // A CMS "text" widget only gives us one string back — blank lines
-        // in it mark paragraph breaks, same convention as Markdown, so a
-        // content manager can add more just by leaving a blank line.
-        var paragraphs = String(settings.about.story)
-          .split(/\n\s*\n/)
-          .map(function (p) { return p.trim(); })
-          .filter(Boolean);
-        storyEl.innerHTML = paragraphs.map(function (p) { return "<p>" + escapeHTML(p) + "</p>"; }).join("");
-      }
+      if (missionEl && settings.about && settings.about.mission) renderParagraphs(missionEl, settings.about.mission);
+      if (storyEl && settings.about && settings.about.story) renderParagraphs(storyEl, settings.about.story);
       if (teamEl && settings.about && settings.about.teamNote) teamEl.textContent = settings.about.teamNote;
       if (venueEl && settings.venue) {
         venueEl.textContent = settings.venue.name + " — " + settings.venue.address;

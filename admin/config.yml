@@ -72,7 +72,7 @@ collections:
             name: "about"
             widget: "object"
             fields:
-              - { label: "Mission", name: "mission", widget: "text" }
+              - { label: "Mission", name: "mission", widget: "text", hint: "Leave a blank line between paragraphs to start a new one on the About page." }
               - { label: "Story", name: "story", widget: "text", hint: "Leave a blank line between paragraphs to start a new one on the About page." }
               - { label: "Team Note", name: "teamNote", widget: "text", required: false }
           - label: "Newsletter"
