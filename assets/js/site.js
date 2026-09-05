@@ -296,6 +296,31 @@
     });
   }
 
+  /* ---------------- page: review a bar night ---------------- */
+  function renderReviewEventSelect() {
+    var select = document.getElementById("review-event-name");
+    if (!select) return;
+
+    loadEvents().then(function (events) {
+      var pastLiveEvents = sortByDate(
+        events.filter(function (e) { return e.type === "live_event" && !isUpcoming(e.date); }),
+        false
+      );
+
+      if (!pastLiveEvents.length) {
+        select.innerHTML = '<option value="">No past bar nights yet</option>';
+        return;
+      }
+
+      select.innerHTML =
+        '<option value="" disabled selected>Select a bar night…</option>' +
+        pastLiveEvents.map(function (e) {
+          var label = escapeHTML(e.title + " — " + formatDate(e.date));
+          return '<option value="' + label + '">' + label + "</option>";
+        }).join("");
+    });
+  }
+
   /* ---------------- page: about ---------------- */
   function renderAbout() {
     var missionEl = document.getElementById("about-mission");
@@ -406,6 +431,7 @@
     renderHome();
     renderEventsHub();
     renderCalendar();
+    renderReviewEventSelect();
     renderAbout();
   });
 })();

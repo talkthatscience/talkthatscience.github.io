@@ -66,8 +66,10 @@
           <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
 
           <div class="form-field">
-            <label for="review-event-name">Which event did you attend?</label>
-            <input type="text" id="review-event-name" name="event_attended" required placeholder="e.g. Quantum Computing & Cold Coffee, 18 June" />
+            <label for="review-event-name">Which bar night did you attend?</label>
+            <select id="review-event-name" name="event_attended" required>
+              <option value="" disabled selected>Loading…</option>
+            </select>
           </div>
           <div class="form-field">
             <label>Overall rating</label>
@@ -80,8 +82,23 @@
             </div>
           </div>
           <div class="form-field">
-            <label for="review-comments">What worked, what didn't?</label>
-            <textarea id="review-comments" name="comments" placeholder="Sound, venue, length, the questions round — anything."></textarea>
+            <label for="review-worked">What worked?</label>
+            <textarea id="review-worked" name="what_worked" placeholder="Sound, venue, length, the questions round — anything that landed well."></textarea>
+          </div>
+          <div class="form-field">
+            <label for="review-not-worked">What didn't work?</label>
+            <textarea id="review-not-worked" name="what_didnt_work" placeholder="Anything that could be better next time."></textarea>
+          </div>
+          <div class="form-field">
+            <label for="review-heard-about">How did you hear about this event?</label>
+            <select id="review-heard-about" name="heard_about">
+              <option value="Instagram">Instagram</option>
+              <option value="Echobox Radio">Echobox Radio</option>
+              <option value="Friend or word of mouth">Friend or word of mouth</option>
+              <option value="Poster or flyer">Poster or flyer</option>
+              <option value="Walked in at Oedipus Brewery">Walked in at Oedipus Brewery</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
           <div class="form-field">
             <label for="review-return">Would you come back?</label>
@@ -90,6 +107,13 @@
               <option value="maybe">Maybe</option>
               <option value="no">Probably not</option>
             </select>
+          </div>
+          <div class="form-field">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-weight:400;"><input type="checkbox" id="review-newsletter-optin" name="newsletter_optin" value="yes" style="width:auto;" /> Sign me up for the newsletter too</label>
+          </div>
+          <div class="form-field">
+            <label for="review-newsletter-email">Email (only needed if you ticked the newsletter box)</label>
+            <input type="email" id="review-newsletter-email" name="email" placeholder="you@example.com" />
           </div>
           <button class="btn btn-primary btn-block" type="submit">Submit review</button>
         </form>
@@ -122,6 +146,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=12"></script>
+<script src="assets/js/site.js?v=13"></script>
 </body>
 </html>
