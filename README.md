@@ -64,6 +64,7 @@ events.html              Event & Slide Hub — every broadcast + bar night,
                          filterable, with excerpt audio + slide links
 calendar.html            Chronological list of upcoming broadcasts + events
 about.html                About Talk That Science
+team.html                 Full team interview (linked from about.html)
 suggest-topic.html        Contact — topic suggestion form
 review-event.html         Contact — bar night review form
 volunteer.html            Contact — volunteer signup form

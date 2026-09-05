@@ -11,7 +11,9 @@ confirmed/replaced once known:
   intentionally invalid example domain).
 - `social.instagram` — currently `"#"` (no real Instagram URL yet).
 - `venue.note` — "confirm current venue address / room details".
-- `about.teamNote` — "add real host/producer bios and photos here".
+
+`about.teamNote` now has real content (the team's names/roles) and
+`team.html` has a full interview — still missing: team member photos.
 
 ## What to do
 
