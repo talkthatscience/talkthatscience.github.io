@@ -741,6 +741,23 @@
       ],
       "description": "How coral animals build reef skeletons and host algae, and how scientists are testing whether corals can gain heat tolerance as marine heatwaves drive worsening bleaching.",
       "themePhotoUrl": "assets/media/2024-01-18-coral-reefs/cover.jpg"
+    },
+    {
+      "id": "2022-12-23-live-at-museumnacht-the-great-auk",
+      "type": "live_event",
+      "title": "Live at Museumnacht: The Great Auk",
+      "guest": "Bram Langeveld",
+      "date": "2022-12-23",
+      "tags": [
+        "Natural Sciences",
+        "Arts & Culture",
+        "Ornithology",
+        "Extinction",
+        "Photography"
+      ],
+      "episodeLink": "https://soundcloud.com/talkthatscience/museumsnight2",
+      "venue": "Huis Marseille, during Museumnacht Amsterdam",
+      "description": "In this episode we are live at the photography museum Huis Marseille during Museumnacht Amsterdam. There is an exhibition 'Natural Sources' from Jochen Lempert, consisting of poetic pictures of the natural world, inspired by Jochen's scientific background in biology. Jochen and our guest, Bram Langeveld, share a fascination for the Great Auk, a bird that became extinct in the 19th century. We will talk about his discovery of the Great Auk fossils in the Netherlands, and the portrayal of the Great Auk by Jochen Lempert. Why are Bram and Jochen so fascinated by this bird?"
     }
   ]
 }
