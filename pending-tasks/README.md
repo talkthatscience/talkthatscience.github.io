@@ -9,7 +9,7 @@ https://talkthatscience.github.io/.
 These are wired up in code but need one-time setup with external accounts
 before they'll actually work for a visitor.
 
-- [ ] [Google Sheets form backend](01-google-sheets-forms.md) — 4 forms still point at a placeholder endpoint.
+- [ ] [Google Sheets form backend](01-google-sheets-forms.md) — deployed, needs end-to-end verification.
 - [ ] [Decap CMS GitHub OAuth](02-cms-github-oauth.md) — `/admin` login has no auth backend configured yet.
 
 ## Content & polish

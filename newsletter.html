@@ -62,11 +62,10 @@
     <div class="container" style="max-width:720px;">
       <div class="form-card">
         <div class="form-success" id="newsletter-success">You're on the list — thanks!</div>
-        <!-- PLACEHOLDER: set up the Google Sheet + Apps Script Web App (see
-             README "Forms"), then replace YOUR_APPS_SCRIPT_URL below with
-             its deployment URL — or point this at a real mailing list
-             provider (Buttondown/Mailchimp/etc) instead. -->
-        <form name="newsletter" data-sheet-endpoint="YOUR_APPS_SCRIPT_URL" data-success-target="newsletter-success">
+        <!-- Swap for a real mailing list provider (Buttondown/Mailchimp/etc)
+             once you have one — see README "Forms". For now this lands in
+             the same Google Sheet as the other forms. -->
+        <form name="newsletter" data-sheet-endpoint="https://script.google.com/macros/s/AKfycbyjgQpee7uYYjKb48_ZSIjwF-wyLRlPtq66O-EYJ-aBHR4Ir1ICmo9V_LyPJPbsecc7HA/exec" data-success-target="newsletter-success">
           <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
 
           <div class="form-field">

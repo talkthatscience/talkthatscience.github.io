@@ -1,33 +1,30 @@
 # Google Sheets form backend
 
-**Status:** Not started — all 5 forms POST to a placeholder Apps Script URL.
+**Status:** Deployed — the real Apps Script Web App URL is wired into all
+5 forms. Not yet verified end-to-end.
 
 ## Why it matters
 
 `suggest-topic.html`, `review-event.html`, `volunteer.html`,
-`newsletter.html`, and the newsletter box on `index.html` all use
-`data-sheet-endpoint="YOUR_APPS_SCRIPT_URL"`. Until this is replaced with
-a real deployment URL, submissions go nowhere.
+`newsletter.html`, and the newsletter box on `index.html` all POST to the
+deployed Google Apps Script Web App now, instead of a placeholder. What's
+left is confirming each one actually lands correctly — see README
+"Forms" for the tradeoffs of this approach (no real delivery
+confirmation from the page, since Apps Script's redirect breaks CORS).
 
 ## What to do
 
-1. Create a new Google Sheet.
-2. Extensions → Apps Script, delete the placeholder code, and paste in
-   the contents of `scripts/google-sheets-form-handler.gs`.
-3. Deploy → New deployment → type **Web app** → Execute as **Me** → Who
-   has access **Anyone**.
-4. Copy the deployment URL (ends in `/exec`) and replace
-   `YOUR_APPS_SCRIPT_URL` in each matching `data-sheet-endpoint="..."`
-   attribute:
-   - `suggest-topic.html`, `review-event.html`, `volunteer.html`,
-     `newsletter.html` — 1 each
-   - `index.html` — 1 occurrence (newsletter box)
-5. Submit each form once from the live site to confirm a row lands in
-   the matching tab of the Sheet (one tab per form, created
-   automatically on first submission).
+Submit each of the 5 forms once from the live site and confirm a row
+lands in the matching tab of the Google Sheet (one tab per form name —
+`topic-suggestion`, `event-review`, `volunteer-signup`, `newsletter` —
+created automatically on that form's first submission).
 
-No other code changes needed — `assets/js/site.js`'s `initForms()`
-already posts each form's fields to its own `data-sheet-endpoint` and
-shows the inline success message.
+If a tab doesn't appear or a row is missing:
+- Re-check the deployment's "Who has access" is set to **Anyone** (Execute
+  as **Me**) — a stricter setting silently blocks the site's requests.
+- Re-deploy (Deploy → Manage deployments → edit → New version) after any
+  change to `scripts/google-sheets-form-handler.gs`'s contents in the
+  Apps Script editor — edits don't take effect on the live URL until
+  redeployed.
 
 See also: `README.md` → "Forms".
