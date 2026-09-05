@@ -8,7 +8,9 @@ Small text placeholders left in `content/settings.json` that should be
 confirmed/replaced once known:
 
 - `social.email` — currently `hello@talkthatscience.example` (an
-  intentionally invalid example domain).
+  intentionally invalid example domain). Note: this field isn't read by
+  any page — the actual address forms/footer links use is hardcoded per
+  page, see [01-contact-email.md](01-contact-email.md).
 - `social.instagram` — currently `"#"` (no real Instagram URL yet).
 - `venue.note` — "confirm current venue address / room details".
 - `about.teamNote` — "add real host/producer bios and photos here".

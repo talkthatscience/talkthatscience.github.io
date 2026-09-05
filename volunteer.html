@@ -59,12 +59,8 @@
   <section class="section" style="padding-top:0.5rem;">
     <div class="container" style="max-width:720px;">
       <div class="form-card">
-        <div class="form-success" id="volunteer-success">Thanks for signing up — we'll be in touch before the next event.</div>
-        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
-             YOUR_FORM_ID below with the ID it gives you. See README. -->
-        <form name="volunteer-signup" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="volunteer-success">
-          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
-
+        <div class="form-success" id="volunteer-success">Opening your email app — just hit send to sign up.</div>
+        <form name="volunteer-signup" data-mailto="hello@talkthatscience.example" data-mailto-subject="Volunteer signup" data-success-target="volunteer-success">
           <div class="form-field">
             <label for="vol-name">Name</label>
             <input type="text" id="vol-name" name="name" required />
@@ -118,6 +114,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=11"></script>
+<script src="assets/js/site.js?v=12"></script>
 </body>
 </html>
