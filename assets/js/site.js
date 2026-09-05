@@ -314,34 +314,85 @@
     });
   }
 
-  /* ---------------- forms: progressive-enhancement submit ---------------- */
+  /* ---------------- forms: submit straight into a Google Sheet ---------------- */
+  // No third-party form service, no server of our own — every form POSTs
+  // to a Google Apps Script "Web App" bound to a Google Sheet (see README
+  // "Forms" for the one-time setup). The script appends a row to a tab
+  // named after the form; each field's label comes from its own <label>
+  // (or its .form-field group label), so the sheet stays readable without
+  // hardcoding field names here.
+  //
+  // Apps Script's redirect breaks normal CORS, so this uses mode:"no-cors"
+  // — the request still reaches the script and the row still gets
+  // written, but the response is opaque and we can't read a real success/
+  // failure status back. The success message reflects that honestly.
+  function labelFor(form, field) {
+    if (field.id) {
+      var byId = form.querySelector('label[for="' + field.id + '"]');
+      if (byId) return byId.textContent.trim();
+    }
+    var wrap = field.closest(".form-field");
+    var group = wrap ? wrap.querySelector("label") : null;
+    if (group) return group.textContent.trim();
+    return field.getAttribute("name");
+  }
+
   function initForms() {
-    document.querySelectorAll("form[data-ajax-form]").forEach(function (form) {
+    document.querySelectorAll("form[data-sheet-endpoint]").forEach(function (form) {
+      var endpoint = form.getAttribute("data-sheet-endpoint");
       var successId = form.getAttribute("data-success-target");
       var successEl = successId ? document.getElementById(successId) : null;
 
       form.addEventListener("submit", function (e) {
-        // Posts to the form's own `action` (a Formspree endpoint — see
-        // README). Falls back to a normal POST if fetch fails.
         e.preventDefault();
-        var data = new FormData(form);
 
-        fetch(form.getAttribute("action"), {
+        // Formspree-style honeypot: real visitors never see or fill this
+        // field; if it's filled, silently drop the submission.
+        var honeypot = form.querySelector('[name="_gotcha"]');
+        if (honeypot && honeypot.value) return;
+
+        var labels = {};
+        form.querySelectorAll("[name]").forEach(function (field) {
+          var name = field.getAttribute("name");
+          if (name && name !== "_gotcha" && !(name in labels)) labels[name] = labelFor(form, field);
+        });
+
+        var data = new FormData(form);
+        var values = {};
+        var order = [];
+        data.forEach(function (value, key) {
+          if (key === "_gotcha" || !String(value).trim()) return;
+          if (values[key]) {
+            values[key] += ", " + value;
+          } else {
+            values[key] = value;
+            order.push(key);
+          }
+        });
+
+        var fields = {};
+        order.forEach(function (key) { fields[labels[key] || key] = values[key]; });
+
+        fetch(endpoint, {
           method: "POST",
-          headers: { Accept: "application/json" },
-          body: data,
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" }, // avoids a CORS preflight Apps Script can't answer
+          body: JSON.stringify({
+            formName: form.getAttribute("name"),
+            timestamp: new Date().toISOString(),
+            fields: fields,
+          }),
         })
-          .then(function (res) {
-            if (!res.ok) throw new Error("Form submission failed");
-          })
           .then(function () {
             form.reset();
             form.style.display = "none";
             if (successEl) successEl.classList.add("visible");
           })
           .catch(function () {
-            // Fall back to a real form submission if fetch/CORS fails
-            form.submit();
+            // Only a genuine network failure (e.g. offline) lands here —
+            // no-cors means a bad URL or script error looks the same as
+            // success from fetch's point of view.
+            window.alert("Couldn't reach the server — check your connection and try again.");
           });
       });
     });

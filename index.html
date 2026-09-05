@@ -91,10 +91,11 @@
       <div class="form-card" style="max-width:640px;">
         <h2 style="margin-top:0;">Never miss an episode</h2>
         <p class="card-desc">One email whenever there's a new broadcast or bar night. No spam, unsubscribe any time.</p>
-        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
-             YOUR_FORM_ID below with the ID it gives you — or point this at a
-             real mailing list provider (Buttondown/Mailchimp/etc). See README. -->
-        <form name="newsletter" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="newsletter-success">
+        <!-- PLACEHOLDER: set up the Google Sheet + Apps Script Web App (see
+             README "Forms"), then replace YOUR_APPS_SCRIPT_URL below with
+             its deployment URL — or point this at a real mailing list
+             provider (Buttondown/Mailchimp/etc) instead. -->
+        <form name="newsletter" data-sheet-endpoint="YOUR_APPS_SCRIPT_URL" data-success-target="newsletter-success">
           <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
           <div class="form-success" id="newsletter-success">You're on the list — thanks!</div>
           <div class="newsletter-box">
@@ -133,6 +134,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=11"></script>
+<script src="assets/js/site.js?v=12"></script>
 </body>
 </html>

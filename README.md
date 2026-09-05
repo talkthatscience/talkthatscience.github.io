@@ -3,18 +3,17 @@
 A zero-server-maintenance site for the *Talk That Science* Echobox Radio show
 and its live Science Bar Talks at Oedipus Brewery. Plain HTML/CSS/JS — no
 build step, no framework, no backend to patch or pay for. Content is edited
-through a Git-backed CMS (Decap CMS) at `/admin`, and forms are handled by
-Formspree.
+through a Git-backed CMS (Decap CMS) at `/admin`, and forms submit straight
+into a Google Sheet via a small Google Apps Script — no third-party form
+service, no cost (see "Forms" below).
 
-This is built to run entirely on **GitHub**: GitHub Pages for hosting, a
-GitHub OAuth App for CMS login, and Formspree (a separate free service, since
-GitHub itself has no form-handling) for the three forms. Because it's a
-project-page GitHub Pages site (served at `yourusername.github.io/reponame/`,
-not a custom domain at the root), every internal link, `<img src>`, script
-tag, and JSON fetch in this repo uses a **relative path** (`assets/...`,
-`content/...`) rather than a root-relative one (`/assets/...`) — if you later
-move to a custom domain at the root, either shape works fine, so no changes
-would be needed.
+This is built to run entirely on **GitHub + Google**: GitHub Pages for
+hosting, a GitHub OAuth App for CMS login, and a free Google Apps Script
+Web App (since GitHub itself has no form-handling) for the four forms.
+Every internal link, `<img src>`, script tag, and JSON fetch in this repo
+uses a **relative path** (`assets/...`, `content/...`) rather than a
+root-relative one (`/assets/...`), which works whether the site is served
+at a domain root or a subpath.
 
 ## What's real vs. placeholder right now
 
@@ -48,10 +47,10 @@ would be needed.
     photos, theme photos, excerpt audio, or slide decks yet — those still
     need filling in via `/admin` (or `assets/media/<event-id>/`, see
     "Media files" below) as they become available.
-  - The four `action="https://formspree.io/f/YOUR_FORM_ID"` attributes (one
+  - The four `data-sheet-endpoint="YOUR_APPS_SCRIPT_URL"` attributes (one
     each in `suggest-topic.html`, `review-event.html`, `volunteer.html`, and
-    the newsletter box in `index.html`) need your real Formspree form IDs —
-    see "Forms" below.
+    the newsletter box in `index.html`) need your deployed Google Apps
+    Script Web App URL — see "Forms" below.
   - The `backend:` block in `admin/config.yml` needs your GitHub
     username/repo and your deployed OAuth proxy URL — see "Turning on the
     CMS" below.
@@ -228,30 +227,55 @@ no code to write, just deploy and configure:
 
 ## Forms
 
-`suggest-topic.html`, `review-event.html`, and `volunteer.html` (the three
-Contact pages) and the newsletter box on the homepage POST to
-**Formspree**, a free form-backend service that works from any static host
-(GitHub Pages has no built-in form handling of its own):
+`suggest-topic.html`, `review-event.html`, `volunteer.html` (the three
+Contact pages), and the newsletter box on the homepage all submit into a
+**Google Sheet** — no third-party form service, no account beyond Google,
+no cost, no submission cap.
 
-1. Sign up at [formspree.io](https://formspree.io) and create a form for
-   each of the four use cases (topic suggestion, event review, volunteer
-   signup, newsletter) — each gets its own form ID and its own submissions
-   inbox/notifications.
-2. Replace `YOUR_FORM_ID` in the matching `action="https://formspree.io/f/YOUR_FORM_ID"`
-   attribute: one each in `suggest-topic.html`, `review-event.html`,
-   `volunteer.html`, and one in `index.html`.
-3. That's it — `assets/js/site.js` already POSTs each form to its own
-   `action` URL via `fetch`, shows the inline success message, and falls
-   back to a normal form submit (Formspree's own confirmation page) if
-   `fetch` fails for any reason.
+How it works: each submission POSTs to a small **Google Apps Script Web
+App** bound to a Google Sheet you create. The script appends a row to a
+tab named after the form (e.g. "topic-suggestion"), creating that tab
+with headers the first time it gets a submission. The script itself lives
+in this repo at `scripts/google-sheets-form-handler.gs` (Apps Script has
+its own execution environment — you paste that file's contents into a
+Google Sheet's script editor, it doesn't run as part of this site).
 
-The hidden `_gotcha` field in each form is Formspree's built-in honeypot —
-real users never see or fill it; if a bot does, Formspree silently drops
-the submission.
+**One-time setup:**
 
-If you'd rather use a different form service later, only the `action=`
-URLs and the `fetch` call in `assets/js/site.js`'s `initForms()` need to
-change — the HTML structure itself doesn't.
+1. Create a new Google Sheet.
+2. Extensions → Apps Script, delete the placeholder code, and paste in
+   the contents of `scripts/google-sheets-form-handler.gs`.
+3. Deploy → New deployment → type **Web app** → Execute as **Me** → Who
+   has access **Anyone**. ("Anyone" is required for a visitor's browser to
+   be able to POST here at all — it only exposes this one write endpoint,
+   not your sheet's data.)
+4. Copy the deployment URL (ends in `/exec`) and replace
+   `YOUR_APPS_SCRIPT_URL` with it in the `data-sheet-endpoint="..."`
+   attribute of all four forms: one each in `suggest-topic.html`,
+   `review-event.html`, `volunteer.html`, and `index.html`.
+5. Submit each form once from the live site and confirm a row lands in
+   the matching tab.
+
+Tradeoffs worth knowing:
+- **No delivery confirmation.** Apps Script's redirect breaks normal
+  CORS, so the fetch in `initForms()` uses `mode: "no-cors"` — the
+  request still reaches the script and the row still gets written, but
+  the response is opaque, so a wrong URL or a script error looks
+  identical to success from the page's point of view. Test it after
+  setup rather than trusting the success message alone.
+- **Light spam filtering.** The hidden `_gotcha` field is a
+  Formspree-style honeypot, checked both client-side (JS won't even send
+  the request) and inside the Apps Script itself (in case something POSTs
+  directly, bypassing the page) — but there's nothing like Formspree's
+  more sophisticated bot detection behind it.
+- **You're relying on Google's uptime/quotas**, not a dedicated
+  form-backend service's — fine at this site's expected volume, but
+  Apps Script Web Apps do have execution quotas on a free Google account.
+
+If you'd rather use a different form service later (Formspree etc.), only
+`assets/js/site.js`'s `initForms()` and each form's
+`data-sheet-endpoint="..."` attribute need to change — the HTML field
+structure itself doesn't.
 
 ## Extending into the workflows from the brief
 
@@ -259,10 +283,12 @@ A handful of things in the original brief are editorial/automation
 workflows rather than website features, so they're intentionally left as
 "next steps" rather than fake-built here:
 
-- **Newsletter delivery** — the homepage signup form currently lands in
-  Formspree. Connect it to an actual list provider (Buttondown, Mailchimp,
-  etc.) by pointing the form's `action` at their API/embed endpoint instead,
-  or by replacing the form with their embed snippet.
+- **Newsletter delivery** — the homepage signup form currently lands as a
+  row in a Google Sheet (see "Forms" above), so you'd add each subscriber
+  to a real mailing list by hand. Connect it to an actual list provider
+  (Buttondown, Mailchimp, etc.) by pointing the form's `data-sheet-endpoint`
+  at their API/embed endpoint instead, or by replacing the form with
+  their embed snippet.
 - **Pre-interview reminder emails** (with a calendar link + prep notes) and
   **daily audio-excerpt suggestions** are internal workflows, not public
   pages — a small scheduled automation (e.g. a GitHub Actions scheduled

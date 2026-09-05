@@ -60,9 +60,10 @@
     <div class="container" style="max-width:720px;">
       <div class="form-card">
         <div class="form-success" id="volunteer-success">Thanks for signing up — we'll be in touch before the next event.</div>
-        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
-             YOUR_FORM_ID below with the ID it gives you. See README. -->
-        <form name="volunteer-signup" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="volunteer-success">
+        <!-- PLACEHOLDER: set up the Google Sheet + Apps Script Web App (see
+             README "Forms"), then replace YOUR_APPS_SCRIPT_URL below with
+             its deployment URL. -->
+        <form name="volunteer-signup" data-sheet-endpoint="YOUR_APPS_SCRIPT_URL" data-success-target="volunteer-success">
           <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
 
           <div class="form-field">
@@ -118,6 +119,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=11"></script>
+<script src="assets/js/site.js?v=12"></script>
 </body>
 </html>
