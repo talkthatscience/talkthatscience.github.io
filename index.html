@@ -91,11 +91,12 @@
       <div class="form-card" style="max-width:640px;">
         <h2 style="margin-top:0;">Never miss an episode</h2>
         <p class="card-desc">One email whenever there's a new broadcast or bar night. No spam, unsubscribe any time.</p>
-        <!-- Swap for a real mailing list provider (Buttondown/Mailchimp/etc)
-             once you have one — see README "Forms". For now this just
-             emails you each signup to add manually. -->
-        <form name="newsletter" data-mailto="hello@talkthatscience.example" data-mailto-subject="Newsletter signup" data-success-target="newsletter-success">
-          <div class="form-success" id="newsletter-success">Opening your email app — just hit send to subscribe.</div>
+        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
+             YOUR_FORM_ID below with the ID it gives you — or point this at a
+             real mailing list provider (Buttondown/Mailchimp/etc). See README. -->
+        <form name="newsletter" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="newsletter-success">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
+          <div class="form-success" id="newsletter-success">You're on the list — thanks!</div>
           <div class="newsletter-box">
             <label class="visually-hidden" for="newsletter-email">Email address</label>
             <input type="email" id="newsletter-email" name="email" placeholder="you@example.com" required />
@@ -132,6 +133,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=12"></script>
+<script src="assets/js/site.js?v=11"></script>
 </body>
 </html>

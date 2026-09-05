@@ -314,60 +314,35 @@
     });
   }
 
-  /* ---------------- forms: mailto submission ---------------- */
-  // No form-backend service (Formspree etc.) is used, by choice — this
-  // stays free with no account/usage limits. Submitting builds a
-  // mailto: link from the form's fields and hands off to the visitor's
-  // own email app; they still have to hit "send" there, so there's no
-  // real confirmation the message went anywhere, just that their email
-  // app opened. Good enough for a low-volume, human-read set of forms;
-  // see README "Forms" for the tradeoffs and how to swap in a real
-  // form-backend later if that changes.
-  function labelFor(form, field) {
-    if (field.id) {
-      var byId = form.querySelector('label[for="' + field.id + '"]');
-      if (byId) return byId.textContent.trim();
-    }
-    var wrap = field.closest(".form-field");
-    var group = wrap ? wrap.querySelector("label") : null;
-    if (group) return group.textContent.trim();
-    return field.getAttribute("name");
-  }
-
+  /* ---------------- forms: progressive-enhancement submit ---------------- */
   function initForms() {
-    document.querySelectorAll("form[data-mailto]").forEach(function (form) {
-      var to = form.getAttribute("data-mailto");
-      var subject = form.getAttribute("data-mailto-subject") || "Message from the website";
+    document.querySelectorAll("form[data-ajax-form]").forEach(function (form) {
       var successId = form.getAttribute("data-success-target");
       var successEl = successId ? document.getElementById(successId) : null;
 
       form.addEventListener("submit", function (e) {
+        // Posts to the form's own `action` (a Formspree endpoint — see
+        // README). Falls back to a normal POST if fetch fails.
         e.preventDefault();
-
-        var labels = {};
-        form.querySelectorAll("[name]").forEach(function (field) {
-          var name = field.getAttribute("name");
-          if (name && !(name in labels)) labels[name] = labelFor(form, field);
-        });
-
         var data = new FormData(form);
-        var values = {};
-        var order = [];
-        data.forEach(function (value, key) {
-          if (!String(value).trim()) return;
-          if (values[key]) {
-            values[key] += ", " + value;
-          } else {
-            values[key] = value;
-            order.push(key);
-          }
-        });
 
-        var body = order.map(function (key) { return (labels[key] || key) + ": " + values[key]; }).join("\n");
-        var mailto = "mailto:" + encodeURIComponent(to) + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-
-        window.location.href = mailto;
-        if (successEl) successEl.classList.add("visible");
+        fetch(form.getAttribute("action"), {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: data,
+        })
+          .then(function (res) {
+            if (!res.ok) throw new Error("Form submission failed");
+          })
+          .then(function () {
+            form.reset();
+            form.style.display = "none";
+            if (successEl) successEl.classList.add("visible");
+          })
+          .catch(function () {
+            // Fall back to a real form submission if fetch/CORS fails
+            form.submit();
+          });
       });
     });
   }

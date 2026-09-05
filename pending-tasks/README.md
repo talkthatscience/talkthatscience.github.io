@@ -9,7 +9,7 @@ https://talkthatscience.github.io/.
 These are wired up in code but need one-time setup with external accounts
 before they'll actually work for a visitor.
 
-- [ ] [Contact email](01-contact-email.md) — all 4 forms + the footer link still point at a placeholder address.
+- [ ] [Formspree forms](01-formspree-forms.md) — 4 forms still point at a placeholder endpoint.
 - [ ] [Decap CMS GitHub OAuth](02-cms-github-oauth.md) — `/admin` login has no auth backend configured yet.
 
 ## Content & polish

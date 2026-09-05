@@ -59,8 +59,12 @@
   <section class="section" style="padding-top:0.5rem;">
     <div class="container" style="max-width:720px;">
       <div class="form-card">
-        <div class="form-success" id="topic-success">Opening your email app — just hit send to submit your suggestion.</div>
-        <form name="topic-suggestion" data-mailto="hello@talkthatscience.example" data-mailto-subject="Topic suggestion for Talk That Science" data-success-target="topic-success">
+        <div class="form-success" id="topic-success">Thanks — we read every suggestion. If it's a fit, we'll follow up.</div>
+        <!-- PLACEHOLDER: sign up at formspree.io, create a form, and replace
+             YOUR_FORM_ID below with the ID it gives you. See README. -->
+        <form name="topic-suggestion" method="POST" action="https://formspree.io/f/YOUR_FORM_ID" data-ajax-form data-success-target="topic-success">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="_gotcha" /></label></p>
+
           <div class="form-field">
             <label for="topic-idea">What's the topic or research?</label>
             <textarea id="topic-idea" name="topic" required placeholder="e.g. a paper, a researcher, a phenomenon you can't stop thinking about"></textarea>
@@ -108,6 +112,6 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js?v=12"></script>
+<script src="assets/js/site.js?v=11"></script>
 </body>
 </html>

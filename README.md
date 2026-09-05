@@ -3,16 +3,18 @@
 A zero-server-maintenance site for the *Talk That Science* Echobox Radio show
 and its live Science Bar Talks at Oedipus Brewery. Plain HTML/CSS/JS — no
 build step, no framework, no backend to patch or pay for. Content is edited
-through a Git-backed CMS (Decap CMS) at `/admin`, and forms hand off to the
-visitor's own email app via `mailto:` links — no third-party form service,
-by choice (see "Forms" below).
+through a Git-backed CMS (Decap CMS) at `/admin`, and forms are handled by
+Formspree.
 
-This is built to run entirely on **GitHub**: GitHub Pages for hosting and a
-GitHub OAuth App for CMS login — no other accounts or services required.
-Every internal link, `<img src>`, script tag, and JSON fetch in this repo
-uses a **relative path** (`assets/...`, `content/...`) rather than a
-root-relative one (`/assets/...`), which works whether the site is served
-at a domain root or a subpath.
+This is built to run entirely on **GitHub**: GitHub Pages for hosting, a
+GitHub OAuth App for CMS login, and Formspree (a separate free service, since
+GitHub itself has no form-handling) for the three forms. Because it's a
+project-page GitHub Pages site (served at `yourusername.github.io/reponame/`,
+not a custom domain at the root), every internal link, `<img src>`, script
+tag, and JSON fetch in this repo uses a **relative path** (`assets/...`,
+`content/...`) rather than a root-relative one (`/assets/...`) — if you later
+move to a custom domain at the root, either shape works fine, so no changes
+would be needed.
 
 ## What's real vs. placeholder right now
 
@@ -46,10 +48,10 @@ at a domain root or a subpath.
     photos, theme photos, excerpt audio, or slide decks yet — those still
     need filling in via `/admin` (or `assets/media/<event-id>/`, see
     "Media files" below) as they become available.
-  - The placeholder address `hello@talkthatscience.example` — used by all
-    four forms' `data-mailto` and the footer's `mailto:` link — needs to
-    become a real inbox, see "Forms" below and
-    `pending-tasks/01-contact-email.md`.
+  - The four `action="https://formspree.io/f/YOUR_FORM_ID"` attributes (one
+    each in `suggest-topic.html`, `review-event.html`, `volunteer.html`, and
+    the newsletter box in `index.html`) need your real Formspree form IDs —
+    see "Forms" below.
   - The `backend:` block in `admin/config.yml` needs your GitHub
     username/repo and your deployed OAuth proxy URL — see "Turning on the
     CMS" below.
@@ -226,40 +228,30 @@ no code to write, just deploy and configure:
 
 ## Forms
 
-`suggest-topic.html`, `review-event.html`, `volunteer.html` (the three
-Contact pages), and the newsletter box on the homepage don't use a
-third-party form-backend service (Formspree etc.) — by choice, to keep
-this at zero cost with no account, no usage caps, and nothing to set up.
-Instead:
+`suggest-topic.html`, `review-event.html`, and `volunteer.html` (the three
+Contact pages) and the newsletter box on the homepage POST to
+**Formspree**, a free form-backend service that works from any static host
+(GitHub Pages has no built-in form handling of its own):
 
-1. On submit, `assets/js/site.js`'s `initForms()` reads the form's fields
-   (matching each `name` to its `<label>` text) and builds a `mailto:`
-   link — the recipient and subject come from the form's `data-mailto` /
-   `data-mailto-subject` attributes, the body lists each filled-in field.
-2. The browser navigates to that `mailto:` link, which opens the
-   visitor's own email app with a pre-filled draft addressed to you.
-3. The visitor still has to hit **send** in their email app — there's no
-   way for the site to confirm they did, so the inline message says
-   "Opening your email app…" rather than "Thanks, received."
+1. Sign up at [formspree.io](https://formspree.io) and create a form for
+   each of the four use cases (topic suggestion, event review, volunteer
+   signup, newsletter) — each gets its own form ID and its own submissions
+   inbox/notifications.
+2. Replace `YOUR_FORM_ID` in the matching `action="https://formspree.io/f/YOUR_FORM_ID"`
+   attribute: one each in `suggest-topic.html`, `review-event.html`,
+   `volunteer.html`, and one in `index.html`.
+3. That's it — `assets/js/site.js` already POSTs each form to its own
+   `action` URL via `fetch`, shows the inline success message, and falls
+   back to a normal form submit (Formspree's own confirmation page) if
+   `fetch` fails for any reason.
 
-Tradeoffs worth knowing:
-- **No real confirmation.** If a visitor's device has no email app
-  configured (or they close the draft without sending), the submission
-  silently goes nowhere and the site can't tell.
-- **No spam filtering.** A form-backend service like Formspree filters
-  bot submissions; a `mailto:` link has none of that — but also nothing
-  to abuse, since there's no server processing it.
-- **Long messages may get truncated.** Some email clients cap how much
-  text a `mailto:` URL can carry (roughly ~2000 characters is safe).
+The hidden `_gotcha` field in each form is Formspree's built-in honeypot —
+real users never see or fill it; if a bot does, Formspree silently drops
+the submission.
 
-To point a form at a different address, change its `data-mailto`
-attribute. To swap this whole approach for a real form-backend service
-later (Formspree, Netlify Forms, etc.), only `initForms()` in
-`assets/js/site.js` and each form's `action`/`data-*` attributes need to
-change — the HTML field structure itself doesn't.
-
-The placeholder address these all point to, `hello@talkthatscience.example`,
-needs to become a real inbox — see `pending-tasks/08-content-copy-cleanup.md`.
+If you'd rather use a different form service later, only the `action=`
+URLs and the `fetch` call in `assets/js/site.js`'s `initForms()` need to
+change — the HTML structure itself doesn't.
 
 ## Extending into the workflows from the brief
 
@@ -267,11 +259,10 @@ A handful of things in the original brief are editorial/automation
 workflows rather than website features, so they're intentionally left as
 "next steps" rather than fake-built here:
 
-- **Newsletter delivery** — the homepage signup form currently just emails
-  you each signup (see "Forms" above). Connect it to an actual list
-  provider (Buttondown, Mailchimp, etc.) by pointing the form's `action`
-  at their API/embed endpoint instead, or by replacing the form with
-  their embed snippet.
+- **Newsletter delivery** — the homepage signup form currently lands in
+  Formspree. Connect it to an actual list provider (Buttondown, Mailchimp,
+  etc.) by pointing the form's `action` at their API/embed endpoint instead,
+  or by replacing the form with their embed snippet.
 - **Pre-interview reminder emails** (with a calendar link + prep notes) and
   **daily audio-excerpt suggestions** are internal workflows, not public
   pages — a small scheduled automation (e.g. a GitHub Actions scheduled
