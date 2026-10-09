@@ -12,18 +12,33 @@
         "Mathematics",
         "Social Media",
         "Psychology"
+      ],
+      "guestPhotos": [
+        {
+          "name": "Mina Young Pedersen",
+          "photoUrl": "assets/media/2027-03-13-social-media-isolation-and-mathematics/profile.jpg"
+        }
       ]
     },
     {
-      "id": "2027-02-13-medieval-history",
+      "id": "2027-02-13-gender-vision-and-biblical-women-in-late-medieval-manuscript-illumination",
       "type": "broadcast",
-      "title": "Medieval History",
-      "guest": "Matti",
+      "title": "Gender, Vision, and Biblical Women in Late Medieval Manuscript Illumination",
+      "guest": "Mattie van den Bosch",
       "date": "2027-02-13",
       "tags": [
         "Humanities",
-        "Medieval History"
-      ]
+        "Medieval History",
+        "Art History",
+        "Gender Studies"
+      ],
+      "guestPhotos": [
+        {
+          "name": "Mattie van den Bosch",
+          "photoUrl": "assets/media/2027-02-13-gender-vision-and-biblical-women-in-late-medieval-manuscript-illumination/profile.jpg"
+        }
+      ],
+      "themePhotoUrl": "assets/media/2027-02-13-gender-vision-and-biblical-women-in-late-medieval-manuscript-illumination/cover.png"
     },
     {
       "id": "2027-01-16-echo-chambers",
