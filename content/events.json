@@ -58,7 +58,14 @@
         "Neuroscience",
         "Molecular Biology",
         "Cell Biology"
-      ]
+      ],
+      "guestPhotos": [
+        {
+          "name": "Tamara Buijs",
+          "photoUrl": "assets/media/2026-11-21-synapse-development-and-neural-circuit-formation/profile.jpg"
+        }
+      ],
+      "themePhotoUrl": "assets/media/2026-11-21-synapse-development-and-neural-circuit-formation/cover.avif"
     },
     {
       "id": "2026-10-21-sending-sounds-an-african-approach-to-music-analysis",
@@ -77,10 +84,14 @@
         {
           "name": "Josephine Zwaan",
           "photoUrl": "assets/media/2026-10-21-sending-sounds-an-african-approach-to-music-analysis/images.jpg"
+        },
+        {
+          "name": "Femke Dekker",
+          "photoUrl": "assets/media/2026-10-21-sending-sounds-an-african-approach-to-music-analysis/profile.jpg"
         }
       ],
       "venue": "Oedipus Brewery",
-      "themePhotoUrl": "assets/media/2026-10-21-sending-sounds-an-african-approach-to-music-analysis/cover.jpg"
+      "themePhotoUrl": "assets/media/2026-10-21-sending-sounds-an-african-approach-to-music-analysis/cover.jpeg"
     },
     {
       "id": "2026-08-29-teachings-of-the-diaspora-on-climate-justice",
