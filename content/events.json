@@ -1,11 +1,36 @@
 {
   "events": [
     {
-      "id": "2026-10-24-echo-chambers",
+      "id": "2027-03-13-social-media-isolation-and-mathematics",
+      "type": "broadcast",
+      "title": "Social Media, Isolation, and Mathematics",
+      "guest": "Mina Young Pedersen",
+      "date": "2027-03-13",
+      "tags": [
+        "Natural Sciences",
+        "Social Sciences",
+        "Mathematics",
+        "Social Media",
+        "Psychology"
+      ]
+    },
+    {
+      "id": "2027-02-13-medieval-history",
+      "type": "broadcast",
+      "title": "Medieval History",
+      "guest": "Matti",
+      "date": "2027-02-13",
+      "tags": [
+        "Humanities",
+        "Medieval History"
+      ]
+    },
+    {
+      "id": "2027-01-16-echo-chambers",
       "type": "broadcast",
       "title": "Echo Chambers",
       "guest": "Cristina Chueca del Cerro",
-      "date": "2026-10-24",
+      "date": "2027-01-16",
       "tags": [
         "Social Sciences",
         "Media Studies",
@@ -16,10 +41,24 @@
       "guestPhotos": [
         {
           "name": "Cristina Chueca del Cerro",
-          "photoUrl": "assets/media/2026-10-24-echo-chambers/profile.jpg"
+          "photoUrl": "assets/media/2027-01-16-echo-chambers/profile.jpg"
         }
       ],
-      "themePhotoUrl": "assets/media/2026-10-24-echo-chambers/cover.jpg"
+      "themePhotoUrl": "assets/media/2027-01-16-echo-chambers/cover.jpg"
+    },
+    {
+      "id": "2026-11-21-synapse-development-and-neural-circuit-formation",
+      "type": "broadcast",
+      "title": "Synapse Development and Neural Circuit Formation",
+      "guest": "Tamara Buijs",
+      "date": "2026-11-21",
+      "tags": [
+        "Natural Sciences",
+        "Medicine & Health",
+        "Neuroscience",
+        "Molecular Biology",
+        "Cell Biology"
+      ]
     },
     {
       "id": "2026-10-21-gqom-at-oedipus-brewery",
@@ -42,27 +81,6 @@
       ],
       "venue": "Oedipus Brewery",
       "themePhotoUrl": "assets/media/2026-10-21-gqom-at-oedipus-brewery/cover.jpg"
-    },
-    {
-      "id": "2026-09-26-fire-resilient-forests",
-      "type": "broadcast",
-      "title": "Fire-Resilient Forests",
-      "guest": "Fiona Thacker",
-      "date": "2026-09-26",
-      "tags": [
-        "Natural Sciences",
-        "Forestry",
-        "Climate Change",
-        "Ecology"
-      ],
-      "episodeLink": "https://www.echobox.radio/shows/talk-that-science",
-      "guestPhotos": [
-        {
-          "name": "Fiona Thacker",
-          "photoUrl": "assets/media/2026-09-26-fire-resilient-forests/profile.jpg"
-        }
-      ],
-      "themePhotoUrl": "assets/media/2026-09-26-fire-resilient-forests/cover.jpg"
     },
     {
       "id": "2026-08-29-teachings-of-the-diaspora-on-climate-justice",
